@@ -11,7 +11,7 @@ public with sharing class recommendationListAuraService {
     public static List<Title__c> getRecommendedTitlesFromGenresList(List<String> genres){
         List<Title__c> newTitles = new List<Title__c>();
         for(String s : genres){
-            newTitles.addAll([SELECT Id, Name, Thumbnail__c, Genre__c
+            newTitles.addAll([SELECT Id, Name, Thumbnail__c, Genre__c, Available_Stock__c, Total_Stock__c
                                 FROM Title__c
                                 WHERE Genre__c includes (:s)]);
         }
