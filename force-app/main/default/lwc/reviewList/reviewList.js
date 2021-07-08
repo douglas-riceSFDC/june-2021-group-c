@@ -1,5 +1,3 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement } from 'lwc';
 
-export default class ReviewList extends LightningElement {
-    @api movieReviews;
-}
+export default class ReviewList extends LightningElement {}

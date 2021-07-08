@@ -1,3 +1,0 @@
-<aura:event type="COMPONENT">
-    <aura:attribute name="movieReviewSubmission" type="integer"/>
-</aura:event>
