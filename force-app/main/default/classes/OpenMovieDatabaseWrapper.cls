@@ -3,7 +3,7 @@ public with sharing class OpenMovieDatabaseWrapper {
     @future (callout=true)
     public static void getTitleDetails(Set<Id> titleIds) {
         Http http = new Http();
-        List<Title__c> titles = [SELECT Name FROM Title__c WHERE Id IN :titleIds];
+        List<Title__c> titles = [SELECT Name, Director__c, Writer__c, Notable_Actors__c FROM Title__c WHERE Id IN :titleIds];
 
         for(Title__c title : titles) {
             try{
@@ -15,9 +15,10 @@ public with sharing class OpenMovieDatabaseWrapper {
     
                 if(response.getStatusCode() == 200) {
                     Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
-                    title.Director__c = (String)results.get('Director');
-                    title.Writer__c = (String)results.get('Writer');
-                    title.Notable_Actors__c = (String)results.get('Actors');
+                    
+                    title.Director__c = title.Director__c == null ? (String)results.get('Director') : title.Director__c;
+                    title.Writer__c = title.Writer__c == null ? (String)results.get('Writer') : title.Writer__c;
+                    title.Notable_Actors__c = title.Notable_Actors__c == null ? (String)results.get('Actors') : title.Notable_Actors__c;
                 } else {
                     System.debug('Response was not as expected; Status code: ' + response.getStatusCode());
                 }
