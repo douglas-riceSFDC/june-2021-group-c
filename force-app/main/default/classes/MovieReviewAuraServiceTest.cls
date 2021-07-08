@@ -1,7 +1,7 @@
 @isTest
 private class MovieReviewAuraServiceTest {
     @isTest
-    static void getMovieReviews_givenMovieReviewsForSpecificTitle_shouldReturnMovieReviewsFromDesiredTitle()
+    static void getMovieReviews_givenMovieReviewsForSpecificTitle_shouldReturnMovieReviewsForSpecifiedTitle()
     {
         List<Movie_Review__c> testList = new List<Movie_Review__c>();
 
@@ -9,32 +9,35 @@ private class MovieReviewAuraServiceTest {
         testTitle.Name = 'First Title';
 
         Movie_Review__c firstReview = new Movie_Review__c();
-        firstReview.Title__r = testTitle;
+        firstReview.Title__c = testTitle.Id;
         testList.add(firstReview);
 
         Movie_Review__c secondReview = new Movie_Review__c();
-        secondReview.Title__r = testTitle;
+        secondReview.Title__c = testTitle.Id;
         testList.add(secondReview);
-
-        Title__c secondTestTitle = new Title__c();
-        secondTestTitle.Name = 'Second Title';
-        Movie_Review__c thirdReview = new Movie_Review__c();
-        thirdReview.Title__r = secondTestTitle;
-        testList.add(thirdReview);
 
         Test.startTest();
         
         insert testList;
+        List<Movie_Review__c> returnedMovieReviews = MovieReviewAuraService.getMovieReviews(5, testTitle.Id);
 
         Test.stopTest();
 
-        List<Movie_Review__c> generatedMovieReviews = 
-                [SELECT Name, Rating__c, Review__c, Reviewer__c, Reviewer__r.SmallPhotoURL, 
-                        Reviewer__r.FirstName, Reviewer__r.LastName, Title__c, CreatedDate
-                FROM Movie_Review__c
-                WHERE Title__r.Id = :testTitle.Id
-                ORDER BY CreatedDate DESC];
+        system.assertEquals(2, returnedMovieReviews.size(), 'Two movie review should have been returned');
+    }
 
-        system.assertEquals(1, generatedMovieReviews.size(), 'One movie review should have been returned');
+    @isTest
+    static void getMovieReviews_givenNoMovieReviewsForSpecificTitle_shouldNotdReturnMovieReviews()
+    {
+        Title__c testTitle = new Title__c();
+        testTitle.Name = 'First Title';
+
+        Test.startTest();
+
+        List<Movie_Review__c> returnedMovieReviews = MovieReviewAuraService.getMovieReviews(5, testTitle.Id);
+
+        Test.stopTest();
+
+        system.assertEquals(0, returnedMovieReviews.size(), 'No movie reviews should have be returned');
     }
 }

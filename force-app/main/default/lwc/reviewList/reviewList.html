@@ -5,21 +5,19 @@
 				<c-review-card movie-review={review}>
                     <div class="slds-card__body slds-card__body_inner">
                         <div class="slds-var-p-around_small">
-                            <img class="thumbnail" src={review.Reviewer__r.SmallPhotoUrl} alt="Profile Picture" />
-                            <span class="slds-var-p-around_small slds-text-title_bold">
+                            <img class="slds-avatar_circle" src={review.Reviewer__r.SmallPhotoUrl} alt="Profile Picture" />
+                            <span class="slds-var-p-around_small slds-text-heading_medium">
                                 {review.Reviewer__r.FirstName}  {review.Reviewer__r.LastName}
                             </span>
-                            <span class="slds-float_right slds-var-p-around_small">
-                                {review.Rating__c} out of 5 Stars
-                            </span>
+                            <c-movie-review-rating movie-review={review}>
+                            </c-movie-review-rating>
                         </div>
-                        
                         <div class="slds-var-p-around_small">
-                            <span class="slds-var-p-around_small">
+                            <span class="slds-var-p-around_small slds-text-body_medium">
                                 {review.Review__c}
                             </span>
                             <lightning-formatted-date-time class="slds-float_right slds-var-p-around_small" 
-                                                            value={review.CreatedDate} year="numeric" month="short" day="2-digit">
+                                                    value={review.CreatedDate} year="numeric" month="short" day="2-digit">
                             </lightning-formatted-date-time>
                         </div>
                     </div>
