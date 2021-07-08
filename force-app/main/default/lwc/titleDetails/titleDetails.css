@@ -1,0 +1,16 @@
+.DetailInfoLine {
+    margin-left: 45px;
+    font-size: 15px;
+    font-weight: 200;
+}
+
+.DetailNameLine {
+    margin-left: 20px;
+    font-size:20px;
+    font-weight: 100;
+}
+
+.Poster {
+	max-height: 450px;
+	max-width: 300px;
+}

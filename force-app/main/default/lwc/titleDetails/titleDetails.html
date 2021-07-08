@@ -1,0 +1,61 @@
+<template>
+    <div class="acc-container">
+        <template for:each={titles} for:item="title">
+            <div key={title.Id}>
+                <lightning-card icon-name="custom:custom21" title={title.Name}>
+                    <lightning-button disabled={buttonTrue} class="rentButton" slot="actions" variant="brand-outline" label="Rent" title="Rent this Movie" onclick={handleClick}></lightning-button>
+                    <div class="slds-grid slds-wrap">
+
+                        <div class="slds-col slds-size_1-of-3 slds-var-p-around_small">
+                            <img class="Poster" src={title.Poster__c}></img>
+
+                            <img class="Poster" src={title.Thumbnail__c}></img>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-3 slds-var-p-around_small">
+
+                            <div class="DetailNameLine">Release Date</div>
+                            <div class="DetailInfoLine">{title.Release_Date__c}</div>
+
+
+                                <div class="DetailNameLine">Rating</div>
+                                <div class="DetailInfoLine">{title.Rating__c}</div>
+
+
+                                <div class="DetailNameLine">Runtime</div>
+                                <div class="DetailInfoLine">{title.Runtime__c}</div>
+
+                                <div class="DetailNameLine">Genre</div>
+                                <div class="DetailInfoLine">{title.Genre__c}</div>
+
+                                <div class="DetailNameLine">Language</div>
+                                <div class="DetailInfoLine">{title.Laguage__c}</div>
+
+
+                                <div class="DetailNameLine">Description</div>
+                                <div class="DetailInfoLine">{title.Plot_Description__c}</div>
+
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-var-p-around_small">
+                            <div if:true={title.Director__c}>
+                                <div class="DetailNameLine">Director</div>
+                                <div class="DetailInfoLine">{title.Director__c}</div>
+                            </div>
+                            <div if:true={title.Writer__c}>
+                                <div class="DetailNameLine">Writers</div>
+                                <div class="DetailInfoLine">{title.Writer__c}</div>
+                            </div>
+                            <div if:true={title.Notable_Actors__c}>
+                                <div class="DetailNameLine">Actors</div>
+                                <div class="DetailInfoLine">{title.Notable_Actors__c}</div>
+                            </div>
+
+                            <div class="DetailNameLine">Stock</div>
+                            <div class="DetailInfoLine">{title.Available_Stock__c} / {title.Total_Stock__c}</div>
+                        </div>
+                    </div>
+                </lightning-card>
+            </div>
+        </template>
+    </div>
+</template>
