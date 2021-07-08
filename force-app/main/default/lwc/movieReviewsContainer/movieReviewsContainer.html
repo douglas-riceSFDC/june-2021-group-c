@@ -1,5 +1,8 @@
 <template>
-    <div class="slds-text-heading_large"> Reviews </div>
+    <div class="slds-text-heading_large"> Reviews 
+        <c-average-rating record-id={recordId}>
+        </c-average-rating>
+    </div>
     <c-review-list movie-reviews={movieReviews}>
     </c-review-list>
 </template>

@@ -1,0 +1,23 @@
+<template>
+    <slot></slot>
+    <template for:each={titles} for:item="title">
+        <template for:each={blankStars} for:item="blankStar">
+            <div key={blankStar.Id} class="slds-float_right">
+                <svg height="25" width="27">
+                    <polygon points="12,2 5,25 23,10 2,10 20,25" style="fill:rgb(172, 172, 172);stroke-width:5;fill-rule:nonzero;">
+                    </polygon>
+                    Unfortunately your browser does not support svg.
+                </svg>
+            </div>
+        </template>
+        <template for:each={stars} for:item="star">
+            <div key={star.Id} class="slds-float_right">
+                <svg height="25" width="27">
+                    <polygon points="12,2 5,25 23,10 2,10 20,25" style="fill:rgb(61, 61, 61);stroke-width:5;fill-rule:nonzero;">
+                    </polygon>
+                    Unfortunately your browser does not support svg.
+                </svg>
+            </div>
+        </template>
+    </template>
+</template>
