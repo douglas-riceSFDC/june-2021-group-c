@@ -1,5 +1,6 @@
 import { LightningElement, track, api } from 'lwc';
-import getMovieReviews from '@salesforce/apex/UserHistoryMovieReviewAuraService.getMovieReviews'
+import getUserMovieReviews from '@salesforce/apex/UserHistoryMovieReviewAuraService.getUserMovieReviews'
+import Id from '@salesforce/user/Id'
 
 export default class MyHistoryMovieReviewsContainer extends LightningElement {
     @track movieReviews;
@@ -7,7 +8,7 @@ export default class MyHistoryMovieReviewsContainer extends LightningElement {
     @api recordId;
 
     connectedCallback() {
-        getMovieReviews({ limiter: this.limit, recordId: this.recordId})
+        getUserMovieReviews({recordId: Id})
             .then(result => {
                 this.movieReviews = result;
             })

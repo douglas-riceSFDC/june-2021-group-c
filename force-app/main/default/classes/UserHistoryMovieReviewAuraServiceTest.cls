@@ -26,7 +26,7 @@ private class UserHistoryMovieReviewAuraServiceTest {
         Test.startTest();
         
         insert testList;
-        List<Movie_Review__c> returnedMovieReviews = UserHistoryMovieReviewAuraService.getMovieReviews(UserInfo.getUserId());
+        List<Movie_Review__c> returnedMovieReviews = UserHistoryMovieReviewAuraService.getUserMovieReviews(UserInfo.getUserId());
 
         Test.stopTest();
 
@@ -46,7 +46,7 @@ private class UserHistoryMovieReviewAuraServiceTest {
         
         Test.startTest();
 
-        List<Movie_Review__c> returnedMovieReviews = UserHistoryMovieReviewAuraService.getMovieReviews(UserInfo.getUserID());
+        List<Movie_Review__c> returnedMovieReviews = UserHistoryMovieReviewAuraService.getUserMovieReviews(UserInfo.getUserID());
 
         Test.stopTest();
 
