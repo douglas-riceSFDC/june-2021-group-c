@@ -1,5 +1,5 @@
 import { LightningElement, api, track} from 'lwc';
-
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getTitleInformation from '@salesforce/apex/TitleAuraService.getTitleInformation';
 
 export default class TitleDetails extends LightningElement {
@@ -17,12 +17,24 @@ export default class TitleDetails extends LightningElement {
                 }
             })
             .catch(error => {
-                console.error('Error occured', error);
+                console.error('Error occurred', error);
             });
     }
 
-    handleClick(event) {
-        rentMovie({recordId: this.recordId});
+    handleClick() {
+        this.buttonTrue = true;
+
+        generateRentalForMovie({movieId: this.recordId})
+            .then(results => {
+                const event = new ShowToastEvent({
+                    title: 'Rented Movie',
+                    message: 'Successfully rented movie. Thank you for your business!',
+                });
+                this.dispatchEvent(event);
+            })
+            .catch(error => {
+                console.error('Error occurred', error);
+            });
     }
 
 }

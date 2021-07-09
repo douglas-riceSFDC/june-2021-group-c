@@ -3,7 +3,8 @@
         <template for:each={titles} for:item="title">
             <div key={title.Id}>
                 <lightning-card icon-name="custom:custom21" title={title.Name}>
-                    <lightning-button disabled={buttonTrue} class="rentButton" slot="actions" variant="brand-outline" label="Rent" title="Rent this Movie" onclick={handleClick}></lightning-button>
+                    <lightning-button disabled={buttonTrue} class="rentButton" slot="actions" variant="brand-outline" 
+                                        label="Rent" title="Rent this Movie" onclick={handleClick}></lightning-button>
                     <div class="slds-grid slds-wrap">
 
                         <div class="slds-col slds-size_1-of-3 slds-var-p-around_small">
