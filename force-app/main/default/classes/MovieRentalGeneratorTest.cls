@@ -1,4 +1,3 @@
-
 @isTest
 private class MovieRentalGeneratorTest {
     
@@ -40,6 +39,21 @@ private class MovieRentalGeneratorTest {
     }
 
     @isTest
+    static void getAllChildStockForTitle_givenId_returnAllStock(){
+
+        Title__c testTitle = [SELECT Id, Name FROM Title__c WHERE Name = 'Test Movie'];
+
+        Test.startTest();
+
+        List<Stock__c> results = StockAuraService.getAllChildStockForTitle(testTitle.Id);
+
+        Test.stopTest();
+
+        System.assertEquals(3, results.size(), 'Three Stock should have been returned.');
+
+    }
+
+    @isTest
     static void generateRentalForMovie_givenId_generateNewRental(){
         Title__c testTitle = [SELECT Id, Name FROM Title__c WHERE Name = 'Test Movie'];
 
@@ -72,19 +86,24 @@ private class MovieRentalGeneratorTest {
 
         Test.startTest();
 
-        List<Stock__c> availableStock = StockAuraService.getAllAvailableStockForTitle(testTitle.Id);
-        if(availableStock.isEmpty()){
-            throw new NoDataFoundException(); 
+        Exception unexpectedException; 
+
+        try{
+            List<Stock__c> availableStock = StockAuraService.getAllAvailableStockForTitle(testTitle.Id);
+            if(availableStock.isEmpty()){
+                throw new System.NoDataFoundException(); 
+            }
+            Stock__c rentedStock = availableStock[0];
+            rentedStock.Status__c = 'Rented';
+            update rentedStock;
         }
-        Stock__c rentedStock = availableStock[0];
-        rentedStock.Status__c = 'Rented';
-        update rentedStock;
+        catch(Exception e){
+            unexpectedException = e;
+        }
 
         Test.stopTest();
 
-        List<Rental__c> generatedRentals = [SELECT Id, Name, Stock__c, Customer__c, Due_Date__c FROM Rental__c];
-
-        System.assertEquals(0, generatedRentals.size(), 'No rental should have been generated');
+        System.assertNotEquals(null, unexpectedException, 'An exception should have been thrown');
 
     }
 
