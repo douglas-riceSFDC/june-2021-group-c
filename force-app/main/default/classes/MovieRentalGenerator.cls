@@ -3,7 +3,8 @@ public with sharing class MovieRentalGenerator {
 
     }
 
-    public void generateRentalForMovie(Id movieId){
+    @AuraEnabled
+    public static void generateRentalForMovie(Id movieId){
 
         //Find Available Stock for Movie
         List<Stock__c> availableStock = StockAuraService.getAllAvailableStockForTitle(movieId);
