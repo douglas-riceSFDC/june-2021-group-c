@@ -109,6 +109,7 @@ private class RecommendationListAuraServiceTest {
         String v1 = 'Action';
         genreList.add(v1);
 
+        Integer limiter = 5;
         Test.startTest();
         
         List<Title__c> titles = getRecommendedTitlesFromGenresList(genreList);
@@ -162,7 +163,7 @@ private class RecommendationListAuraServiceTest {
         List<String> genreList = new List<String>();
         String genreString = '';
 
-
+        Integer limiter = 5;
         Test.startTest();
 
         List<Rental__c> rentals = getRentalsFromCustomer();
