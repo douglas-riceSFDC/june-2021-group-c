@@ -6,7 +6,6 @@ public with sharing class MovieRentalGenerator {
     @AuraEnabled
     public static void generateRentalForMovie(Id movieId){
 
-        //Find Available Stock for Movie
         List<Stock__c> availableStock = StockAuraService.getAllAvailableStockForTitle(movieId);
 
         if(availableStock.isEmpty()){

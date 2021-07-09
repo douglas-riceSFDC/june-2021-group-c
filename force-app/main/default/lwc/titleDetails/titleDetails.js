@@ -30,23 +30,19 @@ export default class TitleDetails extends LightningElement {
             const event = new ShowToastEvent({
                 title: 'Rented Movie',
                 message: 'Successfully rented movie. Thank you for your business!',
+                variant: 'success',
             });
             this.dispatchEvent(event);
         }
         catch(error){
             console.error('Error occurred', error);
+            const event = new ShowToastEvent({
+                title: 'Error Occurred',
+                message: 'An error occurred. We were unable to rent your movie. Please try again later.',
+                variant: 'error',
+            });
+            this.dispatchEvent(event);
         }
-        // generateRentalForMovie({movieId: this.recordId});
-        //     .then(results => {
-        //         const event = new ShowToastEvent({
-        //             title: 'Rented Movie',
-        //             message: 'Successfully rented movie. Thank you for your business!',
-        //         });
-        //         this.dispatchEvent(event);
-        //     })
-        //     .catch(error => {
-        //         console.error('Error occurred', error);
-        //     });
     }
 
 }
