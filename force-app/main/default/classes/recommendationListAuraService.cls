@@ -48,7 +48,7 @@ public with sharing class recommendationListAuraService {
     }
 
     @AuraEnabled
-    public static List<Title__c> getRecommendedTitlesFromUser(){
+    public static List<Title__c> getRecommendedTitlesFromUser(Integer limiter){
 
         List<Stock__c> stock = getStockFromRentals(getRentalsFromCustomer());
 
@@ -61,8 +61,16 @@ public with sharing class recommendationListAuraService {
         Set<Title__c> titleSet = new Set<Title__c>();
         titleSet.addAll(getRecommendedTitlesFromGenresList(genreList));
 
-        List<Title__c> titles= new List<Title__c>();
-        titles.addAll(titleSet);
-        return titles;
+        List<Title__c> titlesUnlimited = new List<Title__c>();
+        titlesUnlimited.addAll(titleSet);
+
+        List<Title__c> titlesLimited = new List<Title__c>();
+        Integer recommendationLimit = Math.min(limiter, titlesUnlimited.size());
+
+        for(Integer i = 0; i < recommendationLimit; i++){
+            titlesLimited.add(titlesUnlimited[i]);
+        }
+        // titles.addAll(titleSet);
+        return titlesLimited;
     }
 }

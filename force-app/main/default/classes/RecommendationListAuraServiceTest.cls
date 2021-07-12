@@ -162,7 +162,7 @@ private class RecommendationListAuraServiceTest {
         List<String> genreList = new List<String>();
         String genreString = '';
 
-
+        Integer limiter = 5;
         Test.startTest();
 
         List<Rental__c> rentals = getRentalsFromCustomer();
@@ -176,12 +176,19 @@ private class RecommendationListAuraServiceTest {
         Set<Title__c> titleSet = new Set<Title__c>();
         titleSet.addAll(getRecommendedTitlesFromGenresList(genreList));
 
-        List<Title__c> titles= new List<Title__c>();
-        titles.addAll(titleSet);
+        List<Title__c> titlesUnlimited = new List<Title__c>();
+        titlesUnlimited.addAll(titleSet);
+        
+        List<Title__c> titlesLimited = new List<Title__c>();
 
+        Integer recommendationLimit = Math.min(limiter, titlesUnlimited.size());
+
+        for(Integer i = 0; i < recommendationLimit; i++){
+            titlesLimited.add(titlesUnlimited[i]);
+        }
         Test.stopTest();
 
-        System.assertEquals(3, titles.size(), 'Three titles should have been recommended');
+        System.assertEquals(3, titlesLimited.size(), 'Three titles should have been recommended');
     }
 
 }
