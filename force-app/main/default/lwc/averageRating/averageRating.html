@@ -1,11 +1,13 @@
 <template>
     <slot></slot>
-    <div class="slds-float_right slds-var-p-right_small"> 
-        <span class="slds-text-heading_medium slds-var-p-right_small">Average Score:</span>
+    <div class={ratingFloatDirection}> 
+        <template if:false={smallStars}>
+            <span class="slds-text-heading_medium slds-var-p-right_small">Average Score:</span>
+        </template>
         <template for:each={blankStars} for:item="blankStar">
-            <div key={blankStar.Id} class="slds-float_right">
-                <svg height="25" width="27">
-                    <polygon points="12,2 5,25 23,10 2,10 20,25" style="fill:rgb(172, 172, 172);stroke-width:5;fill-rule:nonzero;">
+            <div key={blankStar.Id} class='slds-float_right'>
+                <svg height={starHeight} width={starWidth}>
+                    <polygon points={starPoints} style="fill:rgb(172, 172, 172);stroke-width:5;fill-rule:nonzero;">
                     </polygon>
                     ({averageRating} / {totalStars})
                 </svg>
@@ -14,14 +16,14 @@
         <template if:true={halfStar}>
             <div class="slds-float_right">
                 <div style="position:absolute;">
-                    <svg height="25" width="13">
-                        <polygon points="12,2 5,25 23,10 2,10 20,25" style="fill:rgb(61, 61, 61);stroke-width:5;fill-rule:nonzero;">
+                    <svg height={starHeight} width={halfStarWidth}>
+                        <polygon points={starPoints} style="fill:rgb(61, 61, 61);stroke-width:5;fill-rule:nonzero;">
                         </polygon>
                         ({averageRating} / {totalStars})
                     </svg>
                 </div>
-                <svg height="25" width="27">
-                    <polygon points="12,2 5,25 23,10 2,10 20,25" style="fill:rgb(172, 172, 172);stroke-width:5;fill-rule:nonzero; position:absolute;">
+                <svg height={starHeight} width={starWidth}>
+                    <polygon points={starPoints} style="fill:rgb(172, 172, 172);stroke-width:5;fill-rule:nonzero; position:absolute;">
                     </polygon>
                     ({averageRating} / {totalStars})
                 </svg>
@@ -29,8 +31,8 @@
         </template>
         <template for:each={stars} for:item="star">
             <div key={star.Id} class="slds-float_right">
-                <svg height="25" width="27">
-                    <polygon points="12,2 5,25 23,10 2,10 20,25" style="fill:rgb(61, 61, 61);stroke-width:5;fill-rule:nonzero;">
+                <svg height={starHeight} width={starWidth}>
+                    <polygon points={starPoints} style="fill:rgb(61, 61, 61);stroke-width:5;fill-rule:nonzero;">
                     </polygon>
                     ({averageRating} / {totalStars})
                 </svg>

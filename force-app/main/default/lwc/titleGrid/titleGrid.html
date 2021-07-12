@@ -1,7 +1,8 @@
 <template>
     <div class="slds-grid slds-wrap">
 		<template for:each={titles} for:item="title">
-			<div key={title.Id} style="text-align:center;" class="slds-col slds-size_1-of-5 slds-var-p-around_small">
+			<div key={title.Id} style="text-align:center;" class="slds-col slds-size_1-of-1 slds-small-size_1-of-1
+															slds-medium-size_1-of-3 slds-large-size_1-of-5 slds-var-p-around_small">
 				<c-title-card title={title}>
 					<img class="poster" src={title.Poster__c} alt={title.Name} />
 				</c-title-card>
