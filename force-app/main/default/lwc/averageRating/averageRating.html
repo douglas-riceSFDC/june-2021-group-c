@@ -7,23 +7,23 @@
                 <svg height="25" width="27">
                     <polygon points="12,2 5,25 23,10 2,10 20,25" style="fill:rgb(172, 172, 172);stroke-width:5;fill-rule:nonzero;">
                     </polygon>
-                    Unfortunately your browser does not support svg.
+                    ({averageRating} / {totalStars})
                 </svg>
             </div>
         </template>
-        <template for:each={halfStar} for:item="half">
-            <div key={half.Id} class="slds-float_right">
+        <template if:true={halfStar}>
+            <div class="slds-float_right">
                 <div style="position:absolute;">
                     <svg height="25" width="13">
                         <polygon points="12,2 5,25 23,10 2,10 20,25" style="fill:rgb(61, 61, 61);stroke-width:5;fill-rule:nonzero;">
                         </polygon>
-                        Unfortunately your browser does not support svg.
+                        ({averageRating} / {totalStars})
                     </svg>
                 </div>
                 <svg height="25" width="27">
                     <polygon points="12,2 5,25 23,10 2,10 20,25" style="fill:rgb(172, 172, 172);stroke-width:5;fill-rule:nonzero; position:absolute;">
                     </polygon>
-                    Unfortunately your browser does not support svg.
+                    ({averageRating} / {totalStars})
                 </svg>
             </div>
         </template>
@@ -32,7 +32,7 @@
                 <svg height="25" width="27">
                     <polygon points="12,2 5,25 23,10 2,10 20,25" style="fill:rgb(61, 61, 61);stroke-width:5;fill-rule:nonzero;">
                     </polygon>
-                    Unfortunately your browser does not support svg.
+                    ({averageRating} / {totalStars})
                 </svg>
             </div>
         </template>
