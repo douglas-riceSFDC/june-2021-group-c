@@ -1,12 +1,13 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 import getCurrentUsersRentals from '@salesforce/apex/RentalAuraService.getCurrentUsersRentals';
 
 export default class RentedTitlesList extends LightningElement {
 
+    @api limit;
     @track rentals;
 
     connectedCallback() {
-        getCurrentUsersRentals()
+        getCurrentUsersRentals({limiter: this.limit})
             .then(result => {
                 this.rentals = result;
             })

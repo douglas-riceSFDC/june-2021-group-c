@@ -1,7 +1,12 @@
 <template>
-    <template for:each={rentals} for:item="rental">
-       <div key={rental.Id}>
-           <c-rented-title-item rental={rental}></c-rented-title-item>
-       </div>
-    </template>
+    <div class='slds-size_small'>
+        <lightning-card title = 'Currently Rented Titles'></lightning-card>
+        <ul>
+            <template for:each={rentals} for:item="rental">
+                <li key={rental.Id}>
+                    <c-rented-title-item rental={rental}></c-rented-title-item>
+                </li>
+            </template>
+        </ul>
+    </div>
 </template>

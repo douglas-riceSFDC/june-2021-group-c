@@ -1,0 +1,12 @@
+.poster {
+	max-height: 150px;
+	max-width: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.overdue {
+    color: red;
+}
