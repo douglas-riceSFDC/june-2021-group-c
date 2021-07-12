@@ -1,8 +1,8 @@
 <template>
-    <div class="slds-card__body slds-card__body_inner">
+    <div class="slds-card__body slds-card__body_inner slds-box">
         <div class="slds-var-p-around_small">
             <div if:true={title} onclick={handleTitleSelection}>
-                <img class="slds-show_x-small thumbnail" src={title.Thumbnail__c} alt="Movie Poster" />
+                <img class="slds-show_x-small thumbnail" src={title.Poster__c} alt="Movie Poster" />
                 <span class="slds-var-p-around_small slds-text-heading_medium">
                     {title.Name}
                 </span>  
