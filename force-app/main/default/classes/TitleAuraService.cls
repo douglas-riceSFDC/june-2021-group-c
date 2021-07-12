@@ -16,4 +16,12 @@ public with sharing class TitleAuraService {
                 ORDER BY CreatedDate DESC];
 
     }
+
+
+    @AuraEnabled
+    public static List<Title__c> getMovieRatingsInfo(Id recordId){
+        return [SELECT Sum_Review_Ratings__c, Total_Reviews__c
+                FROM Title__c
+                WHERE Id = :recordId];
+    }
 }
