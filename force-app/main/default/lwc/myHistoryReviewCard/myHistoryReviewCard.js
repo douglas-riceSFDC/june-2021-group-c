@@ -1,7 +1,8 @@
 import { LightningElement, api, track } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 import getTitleFromId from '@salesforce/apex/UserHistoryMovieReviewAuraService.getTitleFromId'
 
-export default class MyHistoryReviewCard extends LightningElement {
+export default class MyHistoryReviewCard extends NavigationMixin(LightningElement) {
     @api movieReview;
     @track title;
 
@@ -15,6 +16,16 @@ export default class MyHistoryReviewCard extends LightningElement {
             .catch(error => {
                 console.error('Error occurred', error);
             });
+    }
+
+    handleTitleSelection() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+				recordId: this.title.Id,
+                actionName: 'view',
+            }
+        });
     }
 
 }
