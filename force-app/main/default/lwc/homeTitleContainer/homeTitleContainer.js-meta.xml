@@ -5,10 +5,19 @@
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__RecordPage</target>
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__HomePage">
             <property name="limit" type="Integer" default="5" label="Title Limit"/>
         </targetConfig>
+        <targetConfig targets="lightning__RecordPage">
+            <property name='limit' type='Integer' default='5' label='Title Limit'/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name='limit' type='Integer' default='5' label='Title Limit'/>
+        </targetConfig> 
     </targetConfigs>
 </LightningComponentBundle>
