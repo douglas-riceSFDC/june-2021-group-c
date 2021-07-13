@@ -1,5 +1,23 @@
 <template>
     <lightning-card>
         <slot></slot>
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-var-p-around_small">
+                <img class="slds avatar slds-avatar_circle slds-avatar_large" src={movieReview.Reviewer__r.SmallPhotoUrl} alt="Profile Picture" />
+                <span class="slds-var-p-around_small slds-text-heading_medium">
+                    {movieReview.Reviewer__r.FirstName}  {movieReview.Reviewer__r.LastName}
+                </span>
+                <c-movie-review-rating movie-review={movieReview}>
+                </c-movie-review-rating>
+            </div>
+            <div class="slds-var-p-around_small">
+                <span class="slds-var-p-around_small">
+                    {movieReview.Review__c}
+                </span>
+                <lightning-formatted-date-time class="slds-float_right slds-var-p-around_small" 
+                                        value={movieReview.CreatedDate} year="numeric" month="short" day="2-digit">
+                </lightning-formatted-date-time>
+            </div>
+        </div>
     </lightning-card>
 </template>
