@@ -1,0 +1,10 @@
+.thumbnail{
+    max-height: 50px;
+	max-width: 50px;
+}
+
+.movie-name {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    margin-left: 10px;
+}
