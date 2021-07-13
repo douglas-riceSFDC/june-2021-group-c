@@ -52,4 +52,24 @@ private class UserHistoryMovieReviewAuraServiceTest {
 
         system.assertEquals(0, returnedMovieReviews.size(), 'No movie reviews should have be returned');
     }
+
+    @isTest
+    static void getTitleFromId_givenTitleId_returnTitle(){
+        Title__c testTitle = new Title__c();
+        testTitle.Name = 'First Title';
+        insert testTitle;
+
+        Movie_Review__c firstReview = new Movie_Review__c();
+        firstReview.Title__c = testTitle.Id;
+        insert firstReview;
+
+        Test.startTest();
+
+        List<Title__c> returnedTitle = UserHistoryMovieReviewAuraService.getTitleFromId(firstReview.Title__c);
+    
+        Test.stopTest();
+
+        system.assertEquals('First Title', returnedTitle[0].Name, 'The returned title should be First Title');
+
+    }
 }
