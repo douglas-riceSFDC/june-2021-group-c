@@ -10,8 +10,9 @@ export default class MyHistoryReviewCard extends NavigationMixin(LightningElemen
         console.log(this.movieReview);
         getTitleFromId({titleId: this.movieReview.Title__c})
             .then(result => {
-                this.title = result;
-                console.log(this.title);
+                if(result){
+                    this.title = result[0];
+                }
             })
             .catch(error => {
                 console.error('Error occurred', error);

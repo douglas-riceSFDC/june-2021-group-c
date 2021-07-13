@@ -14,4 +14,11 @@ public with sharing class UserHistoryMovieReviewAuraService {
 
         return reviewList;
     }
+
+    @AuraEnabled
+    public static List<Title__c> getTitleFromId(Id titleId){
+        return [SELECT Name, Id, Poster__c, Thumbnail__c
+                FROM Title__c
+                WHERE Id =: titleId];
+    }
 }

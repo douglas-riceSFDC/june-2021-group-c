@@ -9,8 +9,9 @@ export default class MyHistoryRentalListLine extends NavigationMixin(LightningEl
     connectedCallback() {
         getTitleFromRental({rental: this.movieRental})
             .then(result => {
-                this.movie = result;
-                console.log(this.title);
+                if(result){
+                    this.movie = result[0];                    
+                }
             })
             .catch(error => {
                 console.error('Error occurred', error);
