@@ -20,13 +20,6 @@ public with sharing class recommendationListAuraService {
     }
 
     @AuraEnabled
-    public static List<Title__c> getRecommendedTitlesFromGenres(String genre){
-        return [SELECT Id, Name, Thumbnail__c, Genre__c, Poster__c
-                FROM Title__c
-                WHERE Genre__c includes (:genre)];
-    }
-
-    @AuraEnabled
     public static List<Stock__c> getStockFromRentals(List<Rental__c> rentals){
         List<Stock__c> stocks = new List<Stock__c>();
         for (Rental__c r : rentals) {
