@@ -3,7 +3,7 @@ import { LightningElement, track, api } from 'lwc';
 
 export default class MovieReviewsContainer extends LightningElement {
     @track movieReviews;
-    @api limit;
+    @api limit = 5;
     @api recordId;
 
     connectedCallback() {
@@ -12,7 +12,7 @@ export default class MovieReviewsContainer extends LightningElement {
                 this.movieReviews = result;
             })
             .catch(error => {
-                console.error('Error occured'. error);
+                console.error('Error occured', error);
             });
     }
 }

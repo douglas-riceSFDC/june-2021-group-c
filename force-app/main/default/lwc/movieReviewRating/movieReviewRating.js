@@ -4,16 +4,15 @@ export default class MovieReviewRating extends LightningElement {
     @api movieReview;
     @track stars = [];
     @track blankStars = [];
+    @track totalStars = 5;
 
     connectedCallback()
     {
-        let totalStars = 5;
-
         for (let i = 0; i < this.movieReview.Rating__c; i++) {
             this.stars.push({Id: i});
         }
 
-        for (let i = 0; i < totalStars - this.movieReview.Rating__c; i++) {
+        for (let i = 0; i < this.totalStars - this.movieReview.Rating__c; i++) {
             this.blankStars.push({Id: i});
         }
     }

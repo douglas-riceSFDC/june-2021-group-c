@@ -10,20 +10,17 @@
         <target>lightningCommunity__Default</target>
     </targets>
     <targetConfigs>
-        <targetConfig targets="lightning__HomePage">
-            <property name="limit" type="Integer" default="5" label="Movie Review Limit"/>
-        </targetConfig>
         <targetConfig targets="lightning__RecordPage">
-            <property name="limit" type="Integer" default="5" label="Movie Review Limit"/>
+            <property name="recordId" type="String" label="Title Id"></property>
+            <property name="limit" type="Integer" default="5" label="Movie Review Limit"></property>
         </targetConfig>
         <targetConfig targets="lightningCommunity__Default">
-            <property name="limit" type="Integer" default="5" label="Movie Review Limit"/>
             <property
                 name="recordId"
                 type="String"
                 label="Record Id"
                 description="Automatically bind the page's record id to the component variable"
-                default="{!recordId}" />        
+                default="{!recordId}" />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

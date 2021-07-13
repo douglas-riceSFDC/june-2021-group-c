@@ -1,9 +1,11 @@
 <template>
 	<div onclick={handleTitleSelection}>
-		<lightning-card title={title.Name}>
-			<slot></slot>
-			<div slot="footer">
-				Available {title.Available_Stock__c} / {title.Total_Stock__c}
+		<lightning-card class="slds-text-align_center">
+			<slot name="title"><div><b>{title.Name}</b></div></slot>
+			<br>
+			<slot style="text-align:center; padding:10%;"></slot>
+			<div slot="footer" style="text-align: center;">
+				Available: {title.Available_Stock__c} / {title.Total_Stock__c}
 			</div>
 		</lightning-card>
 	</div>

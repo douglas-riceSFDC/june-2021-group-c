@@ -15,5 +15,4 @@ public with sharing class MovieReviewAuraService {
 
         return reviewList;
     }
-
 }
