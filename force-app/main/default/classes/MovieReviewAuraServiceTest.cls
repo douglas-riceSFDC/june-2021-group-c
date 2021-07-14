@@ -16,18 +16,19 @@ private class MovieReviewAuraServiceTest {
         secondReview.Title__c = testTitle.Id;
         testList.add(secondReview);
 
+        insert testList;
+
         Test.startTest();
         
-        insert testList;
         List<Movie_Review__c> returnedMovieReviews = MovieReviewAuraService.getMovieReviews(5, testTitle.Id);
 
         Test.stopTest();
 
-        system.assertEquals(2, returnedMovieReviews.size(), 'Two movie review should have been returned');
+        system.assertEquals(2, returnedMovieReviews.size(), 'Two movie reviews should have been returned');
     }
 
     @isTest
-    static void getMovieReviews_givenNoMovieReviewsForSpecificTitle_shouldNotdReturnMovieReviews()
+    static void getMovieReviews_givenNoMovieReviewsForSpecificTitle_shouldNotReturnMovieReviews()
     {
         Title__c testTitle = new Title__c();
         testTitle.Name = 'First Title';
