@@ -14,7 +14,7 @@ public with sharing class RentalGenerator {
                 newRental = new Rental__c();
                 newRental.Stock__c = s.Id;
                 newRental.Customer__c = UserInfo.getUserId();
-
+                newRental.Date_Rented__c = Date.today();
                 generatedRentals.add(newRental);
             }
         }
