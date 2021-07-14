@@ -9,6 +9,12 @@ export default class AverageRating extends LightningElement {
     @track halfStar = false;
     @track averageRating;
     @track totalStars = 5;
+    @api smallStars;
+    ratingFloatDirection;
+    starPoints;
+    starWidth;
+    halfStarWidth;
+    starHeight;
 
     connectedCallback() {
         getMovieRatingsInfo({recordId: this.recordId})
@@ -28,6 +34,12 @@ export default class AverageRating extends LightningElement {
                 if (this.averageRating % 1 !== 0 && (this.stars.length + this.blankStars.length) !== 0) {
                     this.halfStar = true;
                 }
+                
+                this.ratingFloatDirection = this.smallStars ? 'slds-float_left' : 'slds-float_right slds-var-p-right_small';
+                this.starPoints = this.smallStars ?  "7.2,1.2 3,15 13.8,6 1.2,6 12,15" : "12,2 5,25 23,10 2,10 20,25";
+                this.starWidth = this.smallStars ? "13" : "27";
+                this.halfStarWidth = this.smallStars ? "8" : "13";
+                this.starHeight = this.smallStars ? "20" : "25";
             })
             .catch(error => {
                 console.error('Error occured', error);
