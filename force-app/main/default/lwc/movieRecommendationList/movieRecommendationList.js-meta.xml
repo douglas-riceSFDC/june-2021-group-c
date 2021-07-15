@@ -11,16 +11,16 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__HomePage">
-            <property name='limit' type='Integer' default="6" label='Movie Recommendation Limit'/>
+            <property name='limit' type='Integer' default="5" label='Movie Recommendation Limit'/>
         </targetConfig>
         <targetConfig targets="lightning__AppPage">
-            <property name='limit' type='Integer' default='6' label='Movie Recommendation Limit'/>
+            <property name='limit' type='Integer' default='5' label='Movie Recommendation Limit'/>
         </targetConfig>
         <targetConfig targets="lightning__RecordPage">
-            <property name='limit' type='Integer' default='6' label='Movie Recommendation Limit'/>
+            <property name='limit' type='Integer' default='5' label='Movie Recommendation Limit'/>
         </targetConfig>
         <targetConfig targets="lightningCommunity__Default">
-            <property name='limit' type='Integer' default='6' label='Movie Recommendation Limit'/>
+            <property name='limit' type='Integer' default='5' label='Movie Recommendation Limit'/>
         </targetConfig> 
     </targetConfigs>
 </LightningComponentBundle>

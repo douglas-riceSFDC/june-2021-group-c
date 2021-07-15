@@ -125,9 +125,9 @@ private class RecommendationListAuraServiceTest {
 
         List<Rental__c> rentals = recommendationListAuraService.getRentalsFromCustomer();
 
-        List<Stock__c> stock = recommendationListAuraService.getStockFromRentals(rentals);
+        // List<Stock__c> stock = recommendationListAuraService.getStockFromRentals(rentals);
 
-        for(Title__c t : recommendationListAuraService.getTitlesFromStock(stock)){
+        for(Title__c t : recommendationListAuraService.getTitlesFromRentals(rentals)){
             genreList.addAll(t.Genre__c.split(';'));
         }
 

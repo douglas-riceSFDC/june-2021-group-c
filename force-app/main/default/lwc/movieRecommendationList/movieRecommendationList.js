@@ -3,7 +3,7 @@ import getRecommendedTitlesFromUser from '@salesforce/apex/recommendationListAur
 
 export default class MovieRecommendationList extends LightningElement {
     @track titles;
-    @api limit = 6;
+    @api limit = 5;
 
     connectedCallback() {
 
