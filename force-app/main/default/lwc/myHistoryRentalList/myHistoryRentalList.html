@@ -1,0 +1,37 @@
+<template>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout" 
+        aria-labelledby="element-with-table-label other-element-with-table-label">
+        <thead>
+            <tr>
+                <th class="" scope="col">
+                    <div class="slds-text-heading_medium" title="Movie Name">Movie</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-text-heading_medium" title="Date Rented">Date Rented</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-text-heading_medium" title="Date Returned">Date Returned</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={movieRentals} for:item="rental">
+                <tr key={rental.Id} class="">
+                    <td>
+                        <c-my-history-rental-list-line movie-rental={rental}>
+                        </c-my-history-rental-list-line>                       
+                    </td>
+                    <td data-label="Date Rented" scope="" class="">
+                        <div class="">{rental.Date_Rented__c}</div>
+                    </td>
+                    <td if:true={rental.Date_Returned__c} data-label="Date Returned" class="">
+                        <div class="">{rental.Date_Returned__c}</div>
+                    </td>
+                    <td if:false={rental.Date_Returned__c} data-label="Date Returned" class="">
+                        <lightning-button variant="Brand" label="Return Movie" onclick={handleClick}></lightning-button>
+                    </td>
+                </tr>
+            </template>
+        </tbody>
+    </table>
+</template>

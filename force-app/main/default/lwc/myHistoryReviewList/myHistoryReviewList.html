@@ -1,0 +1,10 @@
+<template>
+    <div class="slds-grid slds-wrap">
+		<template for:each={movieReviews} for:item="review">
+			<div key={review.Id} class="slds-col slds-size_1-of-1 slds-var-p-around_small">
+				<c-my-history-review-card movie-review={review}>
+				</c-my-history-review-card>
+			</div>
+		</template>
+	</div>
+</template>

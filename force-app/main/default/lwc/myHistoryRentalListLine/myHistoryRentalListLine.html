@@ -1,0 +1,5 @@
+<template>
+    <img if:true={movie} class="slds-show_x-small thumbnail" src={movie.Poster__c} alt="Movie Poster" />
+
+    <span if:true={movie} onclick={handleTitleSelection} class="movie-name">{movie.Name}</span>
+</template>

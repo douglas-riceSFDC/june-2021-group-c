@@ -1,52 +1,5 @@
 @isTest
 private class RecommendationListAuraServiceTest {
-    
-    @AuraEnabled
-    public static List<Rental__c> getRentalsFromCustomer(){
-        return [SELECT Stock__c
-                FROM Rental__c
-                WHERE Customer__c = :UserInfo.getUserId()];
-    }
-
-    @AuraEnabled
-    public static List<Title__c> getRecommendedTitlesFromGenresList(List<String> genres){
-        List<Title__c> newTitles = new List<Title__c>();
-        for(String s : genres){
-            newTitles.addAll([SELECT Id, Name, Thumbnail__c, Genre__c
-                                FROM Title__c
-                                WHERE Genre__c includes (:s)]);
-        }
-        return newTitles;
-    }
-
-    @AuraEnabled
-    public static List<Title__c> getRecommendedTitlesFromGenres(String genres){
-        return [SELECT Id, Name, Thumbnail__c, Genre__c
-                FROM Title__c
-                WHERE Genre__c includes (:genres)];
-    }
-
-    @AuraEnabled
-    public static List<Stock__c> getStockFromRentals(List<Rental__c> rentals){
-        List<Stock__c> stocks = new List<Stock__c>();
-        for (Rental__c r : rentals) {
-            stocks.add([SELECT Id, Name, Title__c
-                        FROM Stock__c
-                        WHERE Id = :r.Stock__c]);
-        }
-        return stocks;
-    }
-
-    @AuraEnabled
-    public static List<Title__c> getTitlesFromStock(List<Stock__c> stock){
-        List<Title__c> titles = new List<Title__c>();
-        for (Stock__c s : stock) {
-            titles.add([SELECT Id, Name, Genre__c
-                        FROM Title__c
-                        WHERE Id = :s.Title__c]);
-        }
-        return titles;
-    }
 
     @isTest
     static void getRentalsFromCustomer_givenNothing_shouldReturnRentalsFromCustomer(){
@@ -76,7 +29,7 @@ private class RecommendationListAuraServiceTest {
 
         Test.startTest();
 
-        List<Rental__c> rentals = getRentalsFromCustomer();
+        List<Rental__c> rentals = recommendationListAuraService.getRentalsFromCustomer();
 
         Test.stopTest();
 
@@ -84,7 +37,7 @@ private class RecommendationListAuraServiceTest {
     }
 
     @isTest
-    static void getRecommendedTitlesFromGenres_givenGenres_shouldReturnTitles(){
+    static void getRecommendedTitlesFromGenresList_givenGenres_shouldReturnTitles(){
         Title__c testTitle = new Title__c();
         testTitle.Name = 'Test Movie';
         testTitle.Genre__c = 'Action;Horror';
@@ -111,15 +64,15 @@ private class RecommendationListAuraServiceTest {
 
         Test.startTest();
         
-        List<Title__c> titles = getRecommendedTitlesFromGenresList(genreList);
+        List<Title__c> titles = recommendationListAuraService.getRecommendedTitlesFromGenresList(genreList);
 
         Test.stopTest();
 
         System.assertEquals(2, titles.size(), 'Two titles should have been returned');
     }
 
-    @isTest
-    static void recommendationListPopulationTest_givenUser_returnRecommendations(){
+    @AuraEnabled
+    public static void fullReturnSetup(){
         Title__c testTitle = new Title__c();
         testTitle.Name = 'Test Movie';
         testTitle.Genre__c = 'Action;Horror';
@@ -159,22 +112,27 @@ private class RecommendationListAuraServiceTest {
         testTitle4.Genre__c = 'Comedy';
         insert testTitle4;
 
+    }
+
+    @isTest
+    static void recommendationListPopulationTest_givenUser_returnRecommendations(){
+        fullReturnSetup();
         List<String> genreList = new List<String>();
         String genreString = '';
 
         Integer limiter = 5;
         Test.startTest();
 
-        List<Rental__c> rentals = getRentalsFromCustomer();
+        List<Rental__c> rentals = recommendationListAuraService.getRentalsFromCustomer();
 
-        List<Stock__c> stock = getStockFromRentals(rentals);
+        List<Stock__c> stock = recommendationListAuraService.getStockFromRentals(rentals);
 
-        for(Title__c t : getTitlesFromStock(stock)){
+        for(Title__c t : recommendationListAuraService.getTitlesFromStock(stock)){
             genreList.addAll(t.Genre__c.split(';'));
         }
 
         Set<Title__c> titleSet = new Set<Title__c>();
-        titleSet.addAll(getRecommendedTitlesFromGenresList(genreList));
+        titleSet.addAll(recommendationListAuraService.getRecommendedTitlesFromGenresList(genreList));
 
         List<Title__c> titlesUnlimited = new List<Title__c>();
         titlesUnlimited.addAll(titleSet);
@@ -191,4 +149,47 @@ private class RecommendationListAuraServiceTest {
         System.assertEquals(3, titlesLimited.size(), 'Three titles should have been recommended');
     }
 
+    @isTest
+    static void getTitleFromRental_givenRental_returnTitle(){
+        Title__c testTitle = new Title__c();
+        testTitle.Name = 'Test Movie';
+        testTitle.Genre__c = 'Action;Horror';
+        insert testTitle;
+
+        Stock__c testStock = new Stock__c();
+        testStock.Title__c = testTitle.Id;
+        testStock.Status__c = 'Rented';
+        insert testStock;
+
+        Rental__c testRental = new Rental__c();
+        testRental.Stock__c = testStock.Id;
+        testRental.Customer__c = UserInfo.getUserId();
+        insert testRental;
+
+        List<Title__c> titleList = new List<Title__c>();
+
+        Test.startTest();
+
+        titleList = recommendationListAuraService.getTitleFromRental(testRental);
+
+        Test.stopTest();
+        System.assertEquals('Test Movie', titleList[0].Name, 'The movie Test Movie should have been returned');
+
+    }
+
+    @isTest
+    static void getRecommendedTitlesFromUser_givenUser_returnRecommendations(){
+        fullReturnSetup();
+
+        Integer limiter = 5;
+        List<Title__c> recList = new List<Title__c>();
+
+        Test.startTest();
+
+        recList = recommendationListAuraService.getRecommendedTitlesFromUser(limiter);
+
+        Test.stopTest();
+        System.assertEquals(3, recList.size(), 'Three titles should have been recommended');
+
+    }
 }

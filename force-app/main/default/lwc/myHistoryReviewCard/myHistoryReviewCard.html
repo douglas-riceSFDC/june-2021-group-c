@@ -1,0 +1,23 @@
+<template>
+    <div class="slds-card__body slds-card__body_inner slds-box">
+        <div class="slds-var-p-around_small">
+            <div if:true={title} onclick={handleTitleSelection}>
+                <img class="slds-show_x-small thumbnail" src={title.Poster__c} alt="Movie Poster" />
+                <span class="slds-var-p-around_small slds-text-heading_medium">
+                    {title.Name}
+                </span>  
+            </div>
+
+            <c-movie-review-rating movie-review={movieReview}>
+            </c-movie-review-rating>
+        </div>
+        <div class="slds-var-p-around_small">
+            <span class="slds-var-p-around_small slds-text-heading_small">
+                {movieReview.Review__c}
+            </span>
+            <lightning-formatted-date-time class="slds-float_right slds-var-p-around_small" 
+                                    value={movieReview.CreatedDate} year="numeric" month="short" day="2-digit">
+            </lightning-formatted-date-time>
+        </div>
+    </div>
+</template>
