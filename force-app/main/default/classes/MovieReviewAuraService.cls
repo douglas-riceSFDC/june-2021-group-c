@@ -10,7 +10,9 @@ public with sharing class MovieReviewAuraService {
                                             LIMIT :limiter];
 
         for (Integer i = 0; i < reviewList.size(); ++i){
-            reviewList[i].Reviewer__r.LastName = reviewList[i].Reviewer__r.LastName.substring(0,1); 
+            if(reviewList[i].Reviewer__c != null && reviewList[i].Reviewer__r.LastName != null){
+                reviewList[i].Reviewer__r.LastName = reviewList[i].Reviewer__r.LastName.substring(0,1); 
+            } 
         }
 
         return reviewList;

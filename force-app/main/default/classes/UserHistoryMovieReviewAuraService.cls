@@ -8,10 +8,6 @@ public with sharing class UserHistoryMovieReviewAuraService {
                                             WHERE Reviewer__c = :recordId
                                             ORDER BY CreatedDate DESC];
 
-        for (Integer i = 0; i < reviewList.size(); ++i){
-            reviewList[i].Reviewer__r.LastName = reviewList[i].Reviewer__r.LastName.substring(0,1); 
-        }
-
         return reviewList;
     }
 

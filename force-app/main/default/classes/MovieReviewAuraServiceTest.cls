@@ -7,9 +7,11 @@ private class MovieReviewAuraServiceTest {
 
         Title__c testTitle = new Title__c();
         testTitle.Name = 'First Title';
+        insert testTitle;
 
         Movie_Review__c firstReview = new Movie_Review__c();
         firstReview.Title__c = testTitle.Id;
+        firstReview.Reviewer__c = UserInfo.getUserId();
         testList.add(firstReview);
 
         Movie_Review__c secondReview = new Movie_Review__c();
