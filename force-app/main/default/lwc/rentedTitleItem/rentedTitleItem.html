@@ -1,0 +1,12 @@
+<template>
+    <div>
+        <lightning-card title={rental.Stock__r.Title__r.Name} onclick={handleRecordNavigation}>
+            <div>
+                <img class="poster" src={rental.Stock__r.Title__r.Poster__c} alt={rental.Stock__r.Title__r.Name}/>
+            </div>
+            <div slot="footer">
+                <h2 class={due}>Due Date: {rental.Due_Date__c}</h2>
+            </div>
+        </lightning-card>
+    </div>
+</template>
