@@ -1,0 +1,15 @@
+<aura:component implements="flexipage:availableForAllPageTypes, forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="flowIncomplete" type="Boolean" default="true" />
+    <aura:attribute name="buttonVisible" type="Boolean" default="true" />
+    <aura:renderIf isTrue="{!v.flowIncomplete}">
+        <lightning:flow aura:id="flowData" onstatuschange="{!c.handleStatusChange}" />
+    </aura:renderIf>
+    <aura:renderIf isTrue="{!v.buttonVisible}">
+        <button
+            class="slds-button slds-button_stretch slds-button_brand"
+            onclick="{!c.handleClick}">
+            Request a Film
+        </button>
+    </aura:renderIf>
+</aura:component>	
+

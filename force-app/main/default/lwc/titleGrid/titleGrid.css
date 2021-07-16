@@ -6,4 +6,5 @@
 .poster {
 	max-height: 200px;
 	max-width: 130px;
+	cursor: pointer;
 }

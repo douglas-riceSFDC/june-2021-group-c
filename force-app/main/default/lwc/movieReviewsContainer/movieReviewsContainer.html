@@ -1,8 +1,9 @@
 <template>
-    <span class="slds-text-heading_large slds-var-p-around_small"> Reviews 
-        <c-average-rating record-id={recordId}>
-        </c-average-rating>
-    </span>
+        <div class="slds-var-p-around_small slds-var-p-bottom_large"> 
+            <span class="slds-text-heading_large">Reviews</span> 
+            <c-submit-movie-review style="float: right;" record-id={recordId}></c-submit-movie-review>
+            <c-average-rating style="float:right;" class="slds-var-p-right_medium" record-id={recordId}></c-average-rating>
+        </div>
     <c-review-list movie-reviews={movieReviews} small-stars=false>
     </c-review-list>
 </template>
